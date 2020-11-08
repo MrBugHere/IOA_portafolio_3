@@ -1,9 +1,12 @@
-import networkx as nx
-from casos.c100x500 import data
+from casos.c100x500 import data, Vertex_Edges
 
-graph = nx.Graph()
-graph.add_weighted_edges_from(data)
-src = 1
-trget = 100
-print(nx.dijkstra_path(graph, src, trget))
-# print ()
+import numpy as np
+import pandas as pd
+
+adj_matrix = np.zeros((Vertex_Edges[1],Vertex_Edges[1]), dtype = int)
+for row in data:
+    adj_matrix[row[0]-1][row[1]-1] = row[2]
+    adj_matrix[row[1]-1][row[0]-1] = row[2]
+
+
+
