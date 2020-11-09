@@ -1,6 +1,6 @@
-from casos.c100x500 import data, Vertex_Edges
+from casos.c100x1000 import data, Vertex_Edges
 from collections import deque, namedtuple
-
+import time 
 
 inf = float('inf')
 Edge = namedtuple('Edge', 'start, end, cost')
@@ -60,7 +60,7 @@ class Graph:
         return neighbours
 
     def dijkstra(self, source, dest):
-        assert source in self.vertices, 'Such source node doesn\'t exist'
+        # assert source in self.vertices, 'Such source node doesn\'t exist'
         distances = {vertex: inf for vertex in self.vertices}
         previous_vertices = {
             vertex: None for vertex in self.vertices
@@ -88,7 +88,17 @@ class Graph:
             path.appendleft(current_vertex)
         return path
 
+def main():        
+    graph = Graph(data)
+    print('Solución 1')
+    start_time = time.time()
+    print(graph.dijkstra(1, 100))
+    print("--- %s segundos ---" % (time.time() - start_time))
+    print('Solución 2')
+    start_time = time.time()
+    print(graph.dijkstra(5, 80))
+    print("--- %s segundos ---" % (time.time() - start_time))
 
-graph = Graph(data)
-
-print(graph.dijkstra(5, 80))
+if __name__ == "__main__":
+    main()
+    
